@@ -2,12 +2,12 @@
 #include <ESP8266mDNS.h>
 #include <WiFiUdp.h>
 
-#define MINIMUM_RSSI -80
+#define MPS_MINIMUM_RSSI -80
 
-#define RADAR_BOOTING -16000
-#define CONNECTION_LOST -4000000
-#define RADAR_RSSI_TOO_LOW -3000000
-#define RADAR_UNINITIALIZED -2000000
+#define MPS_RADAR_BOOTING -16000
+#define MPS_CONNECTION_LOST -4000000
+#define MPS_RADAR_RSSI_TOO_LOW -3000000
+#define MPS_RADAR_UNINITIALIZED -2000000
 
 #define MAX_SAMPLEBUFFERSIZE 256
 int * sampleBuffer;
@@ -27,8 +27,8 @@ int bufferIndex = 0;
 
 #define MAX_VARIANCE 65535
 
-int motionSensorLevel = RADAR_BOOTING; 
-int presenceSensorLevel = RADAR_BOOTING; 
+int motionSensorLevel = MPS_RADAR_BOOTING; 
+int presenceSensorLevel = MPS_RADAR_BOOTING; 
 
 int varianceSample = 0; 
 
@@ -62,13 +62,13 @@ int* MemoryInit(int* address, int size)
 
 int CheckErrors(int RSSILevel){
   if (RSSILevel == 0)
-    return CONNECTION_LOST;
+    return MPS_CONNECTION_LOST;
 
   if ((sampleBuffer == NULL) || (mobileAverageBuffer == NULL) || (varianceBuffer == NULL)) 
-    return RADAR_UNINITIALIZED;
+    return MPS_RADAR_UNINITIALIZED;
 
-  if (RSSILevel < MINIMUM_RSSI) 
-    return RADAR_RSSI_TOO_LOW;
+  if (RSSILevel < MPS_MINIMUM_RSSI) 
+    return MPS_RADAR_RSSI_TOO_LOW;
 
   return 1;
 }
