@@ -97,11 +97,11 @@ bool MPS_StartWiFiConnection(const char* SSID, const char* password)
   return true;
 }
 
-void MPS_Setup(int currnetMeasuredPower) {
+void MPS_Setup(int measuredPower) {
   Setup();
 
-  if (currnetMeasuredPower < 0)
-    MeasuredPower = currnetMeasuredPower;
+  if (measuredPower < 0)
+    MeasuredPower = measuredPower;
   else
     MeasuredPower = 1000;
 }
